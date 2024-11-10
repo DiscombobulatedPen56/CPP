@@ -9,7 +9,10 @@ int main(int argc, char* argv[])
     stack.TestPrint();
     Stack stack2(stack);
     stack2.TestPrint();
-    stack2.Pop();
+    //stack2.Pop();
     stack.TestPrint();
+
+    std::cout << stack.Pop() << " ";
+    std::cout << stack.Pop();
     return 0;
 }

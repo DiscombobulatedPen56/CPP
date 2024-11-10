@@ -28,7 +28,9 @@ int Stack::Pop()
 {
     if (!IsEmpty())
     {
-        return data[top--];
+        int x = data[top];
+        top--;
+        return x;
     }
 }
 
