@@ -160,9 +160,6 @@
   <ItemGroup>
     <ClInclude Include="Stack.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Деструктор.md" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
