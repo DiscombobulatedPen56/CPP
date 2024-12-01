@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F00F6BD5-439B-4F7C-82AC-2228AF72DE7E}</ProjectGuid>
+    <ProjectGuid>{3FD24F54-B2FA-42C1-B71D-57FA8310A8BB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Конструктор_копирования</RootNamespace>
+    <RootNamespace>Перегрузка_операторов</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -154,14 +154,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Stack.cpp" />
-    <ClCompile Include="Конструктор_копирования.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Перегрузка_операторов.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Stack.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Деструктор.md" />
+    <ClInclude Include="Point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

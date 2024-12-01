@@ -12,6 +12,7 @@ private:
 public:
     Stack(int size);
     Stack(const Stack& other);
+    ~Stack();
     void Push(int value);
     int Pop();
     int Peek();

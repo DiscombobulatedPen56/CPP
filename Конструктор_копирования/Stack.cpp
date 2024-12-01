@@ -18,6 +18,11 @@ Stack::Stack(const Stack& other)
         this->data[i] = other.data[i];
 }
 
+Stack::~Stack()
+{
+    delete[] data;
+}
+
 void Stack::Push(int value)
 {
     if (!IsFull())
