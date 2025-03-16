@@ -20,6 +20,12 @@ Cell::Cell()
 void Cell::Set(int value)
 {
 	this->value = value;
+	this->values.clear();
+}
+
+void Cell::Remove(int value)
+{
+	this->values.erase(find(this->values.begin(), this->values.end(), value));
 }
 
 Box Matrix::GetBox(int row, int col)
@@ -31,6 +37,15 @@ Box Matrix::GetBox(int row, int col)
 void Matrix::SetValue(int row, int col, int value)
 {
 	this->cells[row][col].Set(value);
+	for (Cell* c : rows[row].values) {
+		c->Remove(value);
+	}
+	for (Cell* c : columns[col].values) {
+		c->Remove(value);
+	}
+	for (Cell* c : boxes[(row % 3) * 3 + (col / 3)].values) {
+		c->Remove(value); 
+	}
 }
 
 Matrix::Matrix()
@@ -47,8 +62,17 @@ Matrix::Matrix()
 			column.Set(k, &cells[k][i]);
 		}
 		columns.push_back(column);
+		int boxI = (i%3)*3, boxJ = (i/3)*3;
+		Box box;
+		int index = 0;
+		for (int z = boxJ; z < boxJ+3; z++) {
+			for (int h = boxI; h < boxI+3; h++){
+				box.Set(index++, &cells[z][h]);
+			}
+		}
+		boxes.push_back(box);
 	}
-	//Links for Box
+	
 }
 
 void Matrix::MakeMatrix(vector<Box> Matrix)

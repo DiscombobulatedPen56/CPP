@@ -4,11 +4,10 @@
 using namespace std;
 class Cell;
 class Box {
-protected:
-	vector<Cell*> values;
 public:
 	Box();
 	void Set(int pos, Cell* cell);
+	vector<Cell*> values; //Not good
 };
 
 class Row : public Box {
@@ -26,6 +25,7 @@ private:
 public:
 	Cell();
 	void Set(int value);
+	void Remove(int value);
 };
 
 class Matrix {

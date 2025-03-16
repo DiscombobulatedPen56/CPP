@@ -5,6 +5,6 @@ using namespace std;
 
 int main() {
 	Matrix matrix;
-	matrix.SetValue(0, 0, 100);
-	cout << 0;
+	matrix.SetValue(0, 0, 1);
+	return 0;
 }
