@@ -19,17 +19,15 @@ class Column : public Box {
 };
 
 class Cell : public Box {
-private:
 	int value;
-	vector<int> values;
 public:
 	Cell();
 	void Set(int value);
 	void Remove(int value);
+	vector<int> available; //Not good
 };
 
 class Matrix {
-private:
 	vector<Box> boxes;
 	vector<Row> rows;
 	vector<Column> columns;
@@ -38,5 +36,4 @@ private:
 public:
 	void SetValue(int row, int col, int value);
 	Matrix();
-	void MakeMatrix(vector<Box> Matrix);
 };
