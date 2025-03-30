@@ -24,6 +24,7 @@ public:
 	Cell();
 	void Set(int value);
 	void Remove(int value);
+	int getValue();
 	vector<int> available; //Not good
 };
 
@@ -35,5 +36,11 @@ class Matrix {
 	Box GetBox(int row, int col);
 public:
 	void SetValue(int row, int col, int value);
+	bool Solved();
+	void Solve();
+	void Fill();
+	void FillFirst();
+	friend std::ostream& operator<<(ostream& stream, const Matrix& a);
 	Matrix();
+
 };

@@ -29,6 +29,11 @@ void Cell::Remove(int value)
         this->available.erase(find(this->available.begin(), this->available.end(), value));
 }
 
+int Cell::getValue()
+{
+    return this->value;
+}
+
 Box Matrix::GetBox(int row, int col)
 {
     int RowIndex = 3 * ((row - 1) / 3) + ((col - 1) / 3);
@@ -58,6 +63,50 @@ void Matrix::SetValue(int row, int col, int value)
     }
 }
 
+
+bool Matrix::Solved()
+{
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (this->cells[i][j].available.size() > 1) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+void Matrix::Solve()
+{
+    while (!Solved()) {
+        Fill();
+        FillFirst();
+    } 
+}
+
+void Matrix::Fill()
+{
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (this->cells[i][j].available.size() == 0) {
+                this->cells[i][j].Set(this->cells[i][j].available[0]);
+            }
+        }
+    }
+}
+
+void Matrix::FillFirst()
+{
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (this->cells[i][j].available.size() > 1) {
+                this->cells[i][j].Set(this->cells[i][j].available[0]);
+            }
+        }
+    }
+}
+
 Matrix::Matrix()
 {
     cells = vector<vector<Cell>>(9, vector<Cell>(9));
@@ -80,3 +129,16 @@ Matrix::Matrix()
         boxes.push_back(box);
     }
 }
+
+std::ostream& operator<<(std::ostream& stream, const Matrix& a)
+{
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            stream << a.cells[i][j].available[0] << ' ';
+        }
+        stream << '\n'; 
+    }
+    return stream;
+}
+
+
