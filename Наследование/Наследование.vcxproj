@@ -154,11 +154,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="A.cpp" />
+    <ClCompile Include="B.cpp" />
     <ClCompile Include="RectMatrix.cpp" />
     <ClCompile Include="SquareMatrix.cpp" />
     <ClCompile Include="Наследование.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="A.h" />
+    <ClInclude Include="B.h" />
     <ClInclude Include="RectMatrix.h" />
     <ClInclude Include="SquareMatrix.h" />
   </ItemGroup>

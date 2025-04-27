@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <iostream>
+
+#include "Position.h"
 using namespace std;
 class Cell;
 class Box {
@@ -24,6 +26,7 @@ public:
 	Cell();
 	void Set(int value);
 	void Remove(int value);
+	void AddToAvailable(int value);
 	int getValue();
 	vector<int> available; //Not good
 };
@@ -36,11 +39,11 @@ class Matrix {
 	Box GetBox(int row, int col);
 public:
 	void SetValue(int row, int col, int value);
-	bool Solved();
-	void Solve();
-	void Fill();
-	void FillFirst();
-	friend std::ostream& operator<<(ostream& stream, const Matrix& a);
+	int GetValue(int row, int col);
+	bool Solved() const;
+	bool Solve(int row, int col);
+	Position GetFirst();
+	friend std::ostream& operator<<(ostream& stream, Matrix& a);
 	Matrix();
 
 };

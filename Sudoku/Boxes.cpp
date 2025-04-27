@@ -1,5 +1,7 @@
 #include "Boxes.h"
 
+#include "Position.h"
+
 Box::Box()
 {
     this->values = vector<Cell*>(9);
@@ -16,17 +18,24 @@ Cell::Cell()
     this->available = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 }
 
-void Cell::Set(int value)
+void Cell::Set(int val)
 {
-    this->value = value;
+    this->value = val;
     this->available.clear();
 }
 
-void Cell::Remove(int value)
+void Cell::Remove(int val)
 {
-    auto it = std::find(this->available.begin(), this->available.end(), value);
+    auto it = std::find(this->available.begin(), this->available.end(), val);
     if (it != this->available.end())
-        this->available.erase(find(this->available.begin(), this->available.end(), value));
+        this->available.erase(it);
+}
+
+void Cell::AddToAvailable(int val)
+{
+    auto it = std::find(this->available.begin(), this->available.end(), val);
+    if (it == this->available.end())
+        this->available.push_back(val);
 }
 
 int Cell::getValue()
@@ -42,33 +51,74 @@ Box Matrix::GetBox(int row, int col)
 
 void Matrix::SetValue(int row, int col, int value)
 {
+    int oldValue = this->cells[row][col].getValue();
     this->cells[row][col].Set(value);
-    for (Cell* c : rows[row].values)
+    if (value == 0 || oldValue != 0)
     {
-        if (c != &this->cells[row][col])
-            c->Remove(value);
-    }
+        this->cells[row][col].available = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        for (Cell* c : rows[row].values)
+        {
+            if (c != &this->cells[row][col])
+            {
+                c->AddToAvailable(oldValue);
+                this->cells[row][col].Remove(c->getValue());
+            }
+        }
+        for (Cell* c : columns[col].values)
+        {
+            if (c != &this->cells[row][col])
+            {
+                c->AddToAvailable(oldValue);
+                this->cells[row][col].Remove(c->getValue());
+            }
+        }
 
-    for (Cell* c : columns[col].values)
-    {
-        if (c != &this->cells[row][col])
-            c->Remove(value);
+        int boxIndex = 3 * ((row - 1) / 3) + ((col - 1) / 3);
+        for (Cell* c : boxes[boxIndex].values)
+        {
+            if (c != &this->cells[row][col])
+            {
+                c->AddToAvailable(oldValue);
+                this->cells[row][col].Remove(c->getValue());
+            }
+        }
     }
-
-    int boxIndex = 3 * ((row - 1) / 3) + ((col - 1) / 3);
-    for (Cell* c : boxes[boxIndex].values)
+    else
     {
-        if (c != &this->cells[row][col])
-            c->Remove(value);
+        for (Cell* c : rows[row].values)
+        {
+            if (c != &this->cells[row][col])
+                c->Remove(value);
+        }
+
+        for (Cell* c : columns[col].values)
+        {
+            if (c != &this->cells[row][col])
+                c->Remove(value);
+        }
+
+        int boxIndex = 3 * ((row - 1) / 3) + ((col - 1) / 3);
+        for (Cell* c : boxes[boxIndex].values)
+        {
+            if (c != &this->cells[row][col])
+                c->Remove(value);
+        }
     }
 }
 
-
-bool Matrix::Solved()
+int Matrix::GetValue(int row, int col)
 {
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            if (this->cells[i][j].available.size() > 1) {
+    return this->cells[row][col].getValue();
+}
+
+bool Matrix::Solved() const
+{
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (!this->cells[i][j].available.empty())
+            {
                 return false;
             }
         }
@@ -76,35 +126,56 @@ bool Matrix::Solved()
     return true;
 }
 
-
-void Matrix::Solve()
+bool Matrix::Solve(int row, int col)
 {
-    while (!Solved()) {
-        Fill();
-        FillFirst();
-    } 
-}
+    // If we've reached the end of the matrix, return true
+    if (row == 9)
+        return true;
 
-void Matrix::Fill()
-{
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            if (this->cells[i][j].available.size() == 0) {
-                this->cells[i][j].Set(this->cells[i][j].available[0]);
-            }
+    // If current cell is already filled, move to next
+    if (this->cells[row][col].getValue() != 0)
+    {
+        if (col == 8)
+            return Solve(row + 1, 0);
+        else
+            return Solve(row, col + 1);
+    }
+
+    // Try all available numbers for this cell
+    for (int num = 1; num <= 9; num++)
+    {
+        if (std::find(this->cells[row][col].available.begin(),
+                     this->cells[row][col].available.end(), num) !=
+            this->cells[row][col].available.end())
+        {
+            // Temporarily place the number
+            this->SetValue(row, col, num);
+
+            // Recursively try to solve the rest
+            bool solved;
+            if (col == 8)
+                solved = Solve(row + 1, 0);
+            else
+                solved = Solve(row, col + 1);
+
+            if (solved)
+                return true;
+
+            // Backtrack if solution not found
+            this->SetValue(row, col, 0);
         }
     }
+
+    return false;
 }
 
-void Matrix::FillFirst()
+Position Matrix::GetFirst()
 {
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            if (this->cells[i][j].available.size() > 1) {
-                this->cells[i][j].Set(this->cells[i][j].available[0]);
-            }
-        }
-    }
+    for (int i = 0; i < 9; i++)
+        for (int j = 0; j < 9; j++)
+            if (!this->cells[i][j].available.empty())
+                return {i, j};
+    return {0, 0};
 }
 
 Matrix::Matrix()
@@ -130,15 +201,25 @@ Matrix::Matrix()
     }
 }
 
-std::ostream& operator<<(std::ostream& stream, const Matrix& a)
+std::ostream& operator<<(std::ostream& stream, Matrix& a)
 {
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            stream << a.cells[i][j].available[0] << ' ';
+    stream << " ";
+    for (int i = 0; i < 9; i++)
+    {
+        if (i > 0 && i < 8 && i % 3 == 0)
+        {
+            stream << "---------------------\n ";
         }
-        stream << '\n'; 
+        for (int j = 0; j < 9; j++)
+        {
+            if (j > 0 && j % 3 == 0)
+            {
+                stream << "| ";
+            }
+            stream << a.GetValue(i, j) << " ";
+        }
+        stream << "\n ";
     }
+    stream << "\n\n";
     return stream;
 }
-
-
