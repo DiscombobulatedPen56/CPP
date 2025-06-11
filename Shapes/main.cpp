@@ -6,8 +6,8 @@
 #include "Triangle.h"
 using namespace std;
 
-vector<Shape> GenerateShapes(int n) {
-	vector<Shape> shapes;
+vector<unique_ptr<Shape>> GenerateShapes(int n) {
+	vector<unique_ptr<Shape>> shapes;
 	random_device rd;
 	mt19937 generator(rd());
 	uniform_int_distribution<> range(1, 5);
@@ -18,21 +18,21 @@ vector<Shape> GenerateShapes(int n) {
 		double side = side_range(generator);
 		switch (range(generator)) {
 		case 1:
-			shapes.push_back(Square(point, side));
+			shapes.push_back(make_unique<Square>(point, point_range(generator)));
 			break;
 		case 2:
-			shapes.push_back(Rectangle(point, side, side_range(generator)));
+			shapes.push_back(make_unique<Rectangle>(point, side, side_range(generator)));
 			break;
 		case 3:
-			shapes.push_back(Circle(point, side));
+			shapes.push_back(make_unique<Circle>(point, point_range(generator)));
 			break;
 		case 4:
-			shapes.push_back(Ellipse(point, side, side_range(generator)));
+			shapes.push_back(make_unique<Ellipse>(point, side, side_range(generator)));
 			break;
 		case 5:
 			Point point2(point_range(generator), point_range(generator));
 			Point point3(point_range(generator), point_range(generator));
-			shapes.push_back(Triangle(point, point2, point3));
+			shapes.push_back(make_unique<Triangle>(point, point2, point3));
 			break;
 		}
 	}
