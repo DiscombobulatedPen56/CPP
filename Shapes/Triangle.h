@@ -9,4 +9,5 @@ public:
 	Triangle(Point a, Point b, Point c);
 	double Area() override;
 	double Perimeter() override;
+	friend std::ostream& operator<<(std::ostream& stream, Triangle& a);
 };

@@ -2,6 +2,7 @@
 #include <random>
 #include "Shape.h"
 #include "Square.h"
+#include "Ellipse.h"
 #include "Circle.h"
 #include "Triangle.h"
 using namespace std;
@@ -42,6 +43,7 @@ vector<unique_ptr<Shape>> GenerateShapes(int n) {
 int main() {
 	int n;
 	cin >> n;
-	GenerateShapes(n);
+	vector<unique_ptr<Shape>> shapes = GenerateShapes(n);
+	
 	return 0;
 }

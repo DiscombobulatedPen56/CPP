@@ -31,3 +31,8 @@ double Rectangle::Area() {
 double Rectangle::Perimeter() {
 	return 2 * (Width() + Height());
 }
+
+std::ostream& operator<<(std::ostream& stream, Rectangle& a) {
+	stream << "Rectangle:" << a.topLeft << a.botRight;
+	return stream;
+}

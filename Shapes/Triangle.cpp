@@ -15,4 +15,8 @@ double Triangle::Perimeter() {
 	return (a.Distance(b) + b.Distance(c) + c.Distance(a));
 }
 
+std::ostream& operator<<(std::ostream& stream, Triangle& a) {
+	stream << a.a << " " << a.b << " " << a.c;
+	return stream;
+}
 //s = ((a.Distance(b)+b.Distance(c)+c.Distance(a))/2)

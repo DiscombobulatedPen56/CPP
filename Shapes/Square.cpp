@@ -13,3 +13,9 @@ Square::Square(Point topLeft, Point botRight)
 Square::Square(Point topLeft, double sideLength) : Rectangle(topLeft, sideLength, sideLength)
 {
 }
+
+std::ostream& operator<<(std::ostream& stream, Square& a) {
+	stream << "Square: " << a.topLeft << " " << a.botRight;
+	return stream;
+}
+

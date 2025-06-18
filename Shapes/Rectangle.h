@@ -1,6 +1,7 @@
 #pragma once
 #include "Point.h"
 #include "Shape.h"
+#include <ostream>
 
 class Rectangle : public Shape{
 protected:
@@ -14,4 +15,5 @@ public:
 	double Perimeter() override;
 	double Width();
 	double Height();
+	friend std::ostream& operator<<(std::ostream& stream, Rectangle& a);
 };
