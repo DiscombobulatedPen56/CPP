@@ -24,15 +24,15 @@ double Rectangle::Height()
 	return this->topLeft.y - this->botRight.y;
 }
 
+void Rectangle::Print(std::ostream& stream)
+{
+	stream << "Rectangle:" << topLeft << " " << botRight;
+}
+
 double Rectangle::Area() {
 	return Width() * Height();
 }
 
 double Rectangle::Perimeter() {
 	return 2 * (Width() + Height());
-}
-
-std::ostream& operator<<(std::ostream& stream, Rectangle& a) {
-	stream << "Rectangle:" << a.topLeft << a.botRight;
-	return stream;
 }

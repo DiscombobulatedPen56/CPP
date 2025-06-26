@@ -8,5 +8,5 @@ public:
 	Square();
 	Square(Point topLeft, double sideLength);
 	Square(Point topLeft, Point botRight);
-	friend std::ostream& operator<<(std::ostream& stream, Square& a);
+	void Print(std::ostream& stream);
 };

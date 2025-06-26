@@ -12,5 +12,5 @@ public:
 	Ellipse(Point center, double a, double b);
 	double Area() override;
 	double Perimeter() override;
-	friend std::ostream& operator<<(std::ostream& stream, Ellipse& a);
+	void Print(std::ostream& stream) override;
 };

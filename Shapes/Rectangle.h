@@ -15,5 +15,5 @@ public:
 	double Perimeter() override;
 	double Width();
 	double Height();
-	friend std::ostream& operator<<(std::ostream& stream, Rectangle& a);
+	void Print(std::ostream& stream);
 };

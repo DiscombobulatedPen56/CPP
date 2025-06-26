@@ -7,7 +7,6 @@ Circle::Circle(Point center, double r) : Ellipse(center, r, r)
 {
 }
 
-std::ostream& operator<<(std::ostream& stream, Circle& a) {
-    stream << std::format("Circle: ({},{}), {}, {}", a.center.x, a.center.y, a.a, a.b) << std::endl;
-    return stream;
+void Circle::Print(std::ostream& stream) {
+    stream << std::format("Circle: ({},{}), {}, {}", center.x, center.y, a, b) << std::endl;
 }

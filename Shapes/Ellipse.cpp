@@ -1,3 +1,4 @@
+#include "Ellipse.h"
 #define _USE_MATH_DEFINES
 #include "Ellipse.h"
 #include <format>
@@ -15,7 +16,8 @@ double Ellipse::Perimeter() {
 	return M_PI * (a + b);
 }
 
-std::ostream& operator<<(std::ostream& stream, Ellipse& a) {
-    stream << std::format("Ellipse: ({},{}), {}, {}", a.center.x, a.center.y, a.a, a.b) << std::endl;
-    return stream;
+void Ellipse::Print(std::ostream& stream)
+{
+	stream << std::format("Ellipse: ({},{}), {}, {}", center.x, center.y, a, b) << std::endl;
 }
+

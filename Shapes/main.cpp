@@ -44,6 +44,8 @@ int main() {
 	int n;
 	cin >> n;
 	vector<unique_ptr<Shape>> shapes = GenerateShapes(n);
-	
+	for (int i = 0; i < n; i++) {
+		cout << shapes[i].get() << endl;
+	}
 	return 0;
 }

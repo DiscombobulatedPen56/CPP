@@ -10,12 +10,13 @@ Square::Square(Point topLeft, Point botRight)
 	this->botRight = botRight;
 }
 
+void Square::Print(std::ostream& stream)
+{
+	stream << "Square: " << topLeft << " " << botRight;
+}
+
 Square::Square(Point topLeft, double sideLength) : Rectangle(topLeft, sideLength, sideLength)
 {
 }
 
-std::ostream& operator<<(std::ostream& stream, Square& a) {
-	stream << "Square: " << a.topLeft << " " << a.botRight;
-	return stream;
-}
 
