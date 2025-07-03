@@ -11,7 +11,7 @@ double Point::Distance(Point b) {
 	return sqrt(abs(this->x - b.x) + abs(this->y - b.y));
 }
 
-std::ostream& operator<<(std::ostream& stream, Point point)
+std::ostream& operator<<(std::ostream& stream, Point& point)
 {
 	stream << "(" << point.x << "," << point.y << ")";
 	return stream;

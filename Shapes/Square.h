@@ -8,5 +8,5 @@ public:
 	Square();
 	Square(Point topLeft, double sideLength);
 	Square(Point topLeft, Point botRight);
-	void Print(std::ostream& stream);
+	void Print(std::ostream& stream) override;
 };

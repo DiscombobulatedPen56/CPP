@@ -15,5 +15,5 @@ public:
 	double Perimeter() override;
 	double Width();
 	double Height();
-	void Print(std::ostream& stream);
+	void Print(std::ostream& stream) override;
 };
