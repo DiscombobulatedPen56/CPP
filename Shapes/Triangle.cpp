@@ -16,6 +16,6 @@ double Triangle::Perimeter() {
 }
 
 void Triangle::Print(std::ostream& stream) {
-	stream << a << " " << b << " " << c;
+	stream << "Triangle: " << a << " " << b << " " << c << "\n";
 }
 //s = ((a.Distance(b)+b.Distance(c)+c.Distance(a))/2)

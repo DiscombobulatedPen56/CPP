@@ -26,7 +26,7 @@ double Rectangle::Height()
 
 void Rectangle::Print(std::ostream& stream)
 {
-	stream << "Rectangle:" << topLeft << " " << botRight;
+	stream << "Rectangle:" << topLeft << " " << botRight << "\n";
 }
 
 double Rectangle::Area() {

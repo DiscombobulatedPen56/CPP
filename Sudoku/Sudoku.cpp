@@ -12,7 +12,7 @@ int main() {
 			matrix.SetValue(i, j, value);
 		}
 	}*/
-
+	
 	Matrix matrix;
 	matrix.SetValue(0, 4, 5);
 	matrix.SetValue(0, 7, 8);

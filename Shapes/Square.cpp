@@ -12,7 +12,7 @@ Square::Square(Point topLeft, Point botRight)
 
 void Square::Print(std::ostream& stream)
 {
-	stream << "Square: " << topLeft << " " << botRight;
+	stream << "Square: " << topLeft << " " << botRight << "\n";
 }
 
 Square::Square(Point topLeft, double sideLength) : Rectangle(topLeft, sideLength, sideLength)

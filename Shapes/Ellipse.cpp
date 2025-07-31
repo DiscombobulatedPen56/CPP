@@ -9,11 +9,11 @@ Ellipse::Ellipse(Point center, double a, double b) : center(center), a(a), b(b)
 }
 
 double Ellipse::Area() {
-	return a * b * M_PI;
+	return a * b * 3.141592653589;
 }
 
 double Ellipse::Perimeter() {
-	return M_PI * (a + b);
+	return 3.141592653589 * (a + b);
 }
 
 void Ellipse::Print(std::ostream& stream)
