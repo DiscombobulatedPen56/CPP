@@ -67,9 +67,9 @@ int main() {
 }
 
 int smallestAreaShape(vector<std::shared_ptr<Shape>> shapes) {
-	int smallest_index;
+	int smallest_index = 0;
 	for (int i = 0; i < shapes.size(); i++) {
-		if (shapes[i].Area() < shapes[smallest_index]) {
+		if (shapes[i]->Area() < shapes[smallest_index]->Area()) {
 			smallest_index = i;
 		}
 	}
@@ -77,19 +77,19 @@ int smallestAreaShape(vector<std::shared_ptr<Shape>> shapes) {
 }
 
 int greatestAreaShape(vector<std::shared_ptr<Shape>> shapes) {
-	int greatest_index;
+	int greatest_index = 0;
 	for (int i = 0; i < shapes.size(); i++) {
-		if (shapes[i].Area() > shapes[smallest_index]) {
-			smallest_index = i;
+		if (shapes[i]->Area() > shapes[greatest_index]->Area()) {
+			greatest_index = i;
 		}
 	}
 	return greatest_index;
 }
 
 int smallestPerimeterShape(vector<std::shared_ptr<Shape>> shapes) {
-	int smallest_index;
+	int smallest_index = 0;
 	for (int i = 0; i < shapes.size(); i++) {
-		if (shapes[i].Perimeter() < shapes[smallest_index]) {
+		if (shapes[i]->Perimeter() < shapes[smallest_index]->Perimeter()) {
 			smallest_index = i;
 		}
 	}
@@ -97,12 +97,11 @@ int smallestPerimeterShape(vector<std::shared_ptr<Shape>> shapes) {
 }
 
 int greatestPerimeterShape(vector<std::shared_ptr<Shape>> shapes) {
-	int greatest_index;
+	int greatest_index = 0;
 	for (int i = 0; i < shapes.size(); i++) {
-		if (shapes[i].Area() > shapes[smallest_index]) {
+		if (shapes[i]->Perimeter() > shapes[greatest_index]->Perimeter()) {
 			greatest_index = i;
 		}
 	}
 	return greatest_index;
 }
-. 
